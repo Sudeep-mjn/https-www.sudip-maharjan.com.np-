@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenAura Nursery | Your Plant Sanctuary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --leaf-green: #2E7D32;
+            --moss-green: #81C784;
+            --earth-brown: #6D4C41;
+            --bg-color: #F9FBE7;
+            --text-color: #333333;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .plant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .plant-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .tab-active {
+            border-bottom: 3px solid var(--leaf-green);
+            color: var(--leaf-green);
+            font-weight: 600;
+        }
+        
+        .care-tip {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .care-tip.active {
+            max-height: 500px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(46, 125, 50, 0.8), rgba(129, 199, 132, 0.7)), 
+                        url('https://images.unsplash.com/photo-1534710961216-75c88202f43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .filter-panel {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-leaf text-3xl text-green-600 mr-2"></i>
+                <span class="text-2xl font-bold text-green-800">GreenAura</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-green-700 hover:text-green-500 font-medium">Home</a>
+                <a href="#plants" class="text-gray-600 hover:text-green-500 font-medium">Plants</a>
+                <a href="#about" class="text-gray-600 hover:text-green-500 font-medium">About</a>
+                <a href="#tips" class="text-gray-600 hover:text-green-500 font-medium">Care Tips</a>
+                <a href="#contact" class="text-gray-600 hover:text-green-500 font-medium">Contact</a>
+            </div>
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section text-white py-20 md:py-32">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Discover Your Perfect Plant</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Explore our curated collection of indoor, outdoor, and aquatic plants to bring nature into your home.</p>
+            <a href="#plants" class="bg-white text-green-700 font-bold py-3 px-8 rounded-full hover:bg-green-50 transition duration-300 inline-block">
+                Browse Our Plants <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Plants Carousel -->
+    <section class="py-12 bg-green-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10 text-green-800">Featured Plants</h2>
+            <div class="relative">
+                <div class="flex overflow-x-auto pb-6 scrollbar-hide space-x-4 px-2">
+                    <!-- Featured Plant Cards -->
+                    <div class="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                 alt="Monstera Deliciosa" class="w-full h-full object-cover transition duration-300">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg text-green-800">Monstera Deliciosa</h3>
+                            <p class="text-gray-600 text-sm mb-2">Indoor • Medium Light</p>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Easy Care</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="img/snakeplant.webp" 
+                                 alt="Snake Plant" class="w-full h-full object-cover transition duration-300">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg text-green-800">Snake Plant</h3>
+                            <p class="text-gray-600 text-sm mb-2">Indoor • Low Light</p>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Very Easy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="img/peace-lily.jpg" 
+                                 alt="Peace Lily" class="w-full h-full object-cover transition duration-300">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg text-green-800">Peace Lily</h3>
+                            <p class="text-gray-600 text-sm mb-2">Indoor • Low Light</p>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Easy Care</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="img/1500x1500-BambooPalminWeavepot.webp" 
+                                 alt="Bamboo Palm" class="w-full h-full object-cover transition duration-300">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg text-green-800">Bamboo Palm</h3>
+                            <p class="text-gray-600 text-sm mb-2">Indoor • Bright Light</p>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Moderate</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="img/fiddle.webp" 
+                                 alt="Fiddle Leaf Fig" class="w-full h-full object-cover transition duration-300">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg text-green-800">Fiddle Leaf Fig</h3>
+                            <p class="text-gray-600 text-sm mb-2">Indoor • Bright Light</p>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Challenging</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-10">
+                    <img src="img/tropical-plant-nursery-4074172.webp" 
+                         alt="GreenAura Nursery" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6 text-green-800">Our Green Story</h2>
+                    <p class="text-gray-700 mb-4">Founded in 2010, GreenAura Nursery began as a small family-owned plant shop with a passion for bringing nature into urban spaces. What started as a humble backyard greenhouse has blossomed into one of the region's most trusted plant nurseries.</p>
+                    <p class="text-gray-700 mb-6">We believe that every home deserves the beauty and benefits of plants. Our mission is to make plant care accessible to everyone, from seasoned gardeners to first-time plant parents.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center bg-green-50 px-4 py-2 rounded-full">
+                            <i class="fas fa-seedling text-green-600 mr-2"></i>
+                            <span class="text-green-800">100+ Plant Varieties</span>
+                        </div>
+                        <div class="flex items-center bg-green-50 px-4 py-2 rounded-full">
+                            <i class="fas fa-leaf text-green-600 mr-2"></i>
+                            <span class="text-green-800">Organic Practices</span>
+                        </div>
+                        <div class="flex items-center bg-green-50 px-4 py-2 rounded-full">
+                            <i class="fas fa-heart text-green-600 mr-2"></i>
+                            <span class="text-green-800">Expert Care</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plant Catalog Section -->
+    <section id="plants" class="py-16 bg-green-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-6 text-green-800">Our Plant Collection</h2>
+            <p class="text-center text-gray-700 max-w-2xl mx-auto mb-10">Browse our diverse selection of plants perfect for any space and skill level.</p>
+            
+            <!-- Filter Panel -->
+            <div class="filter-panel rounded-lg shadow-md p-6 mb-10">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <input type="text" placeholder="Search plants..." class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 w-full md:w-64">
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                            <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <option>All</option>
+                                <option>Indoor</option>
+                                <option>Outdoor</option>
+                                <option>Aquatic</option>
+                                <option>Succulents</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Light Needs</label>
+                            <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <option>Any</option>
+                                <option>Low Light</option>
+                                <option>Medium Light</option>
+                                <option>Bright Light</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Care Level</label>
+                            <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <option>Any</option>
+                                <option>Easy</option>
+                                <option>Moderate</option>
+                                <option>Challenging</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category Tabs -->
+            <div class="flex border-b border-gray-200 mb-8 overflow-x-auto">
+                <button class="tab-active px-6 py-3 font-medium">All Plants</button>
+                <button class="px-6 py-3 font-medium text-gray-600 hover:text-green-600">Indoor</button>
+                <button class="px-6 py-3 font-medium text-gray-600 hover:text-green-600">Outdoor</button>
+                <button class="px-6 py-3 font-medium text-gray-600 hover:text-green-600">Aquatic</button>
+                <button class="px-6 py-3 font-medium text-gray-600 hover:text-green-600">Succulents</button>
+            </div>
+            
+            <!-- Plant Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Plant cards will be dynamically inserted here -->
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="bg-green-700 text-white font-bold py-3 px-8 rounded-full hover:bg-green-800 transition duration-300 inline-flex items-center">
+                    Load More Plants <i class="fas fa-spinner ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plant Care Tips Section -->
+    <section id="tips" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-6 text-green-800">Plant Care Essentials</h2>
+            <p class="text-center text-gray-700 max-w-2xl mx-auto mb-10">Learn how to keep your plants thriving with our expert care tips.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Care Tip 1 -->
+                <div class="bg-green-50 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-sun text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-800">Light Requirements</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Understanding your plant's light needs is crucial for its health. Most indoor plants thrive in bright, indirect light.</p>
+                    <button class="text-green-600 font-medium flex items-center care-tip-toggle">
+                        Read More <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div class="care-tip bg-white p-0 rounded-lg mt-0">
+                        <p class="text-gray-700">South-facing windows provide the most light, while north-facing offer the least. Rotate your plants regularly for even growth. Signs of too much light include scorched leaves, while leggy growth indicates insufficient light.</p>
+                    </div>
+                </div>
+                
+                <!-- Care Tip 2 -->
+                <div class="bg-green-50 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-tint text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-800">Watering Wisdom</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Overwatering is the most common cause of plant death. Learn to water based on your plant's needs, not a schedule.</p>
+                    <button class="text-green-600 font-medium flex items-center care-tip-toggle">
+                        Read More <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div class="care-tip bg-white p-0 rounded-lg mt-0">
+                        <p class="text-gray-700">Check soil moisture by sticking your finger 1-2 inches into the soil. Most plants prefer to dry out slightly between waterings. Use room-temperature water and ensure proper drainage. Succulents need less frequent watering than tropical plants.</p>
+                    </div>
+                </div>
+                
+                <!-- Care Tip 3 -->
+                <div class="bg-green-50 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-wind text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-800">Humidity & Temperature</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Many houseplants originate from tropical environments and appreciate higher humidity levels.</p>
+                    <button class="text-green-600 font-medium flex items-center care-tip-toggle">
+                        Read More <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div class="care-tip bg-white p-0 rounded-lg mt-0">
+                        <p class="text-gray-700">Group plants together to create a humid microclimate, use a pebble tray, or consider a humidifier. Most houseplants prefer temperatures between 65-75°F (18-24°C). Avoid placing plants near drafts or heating/cooling vents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-green-800 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-6">Visit Us</h2>
+            <p class="text-center max-w-2xl mx-auto mb-10">Have questions about plant care or want to visit our nursery? We'd love to hear from you!</p>
+            
+            <div class="flex flex-col lg:flex-row gap-10">
+                <div class="lg:w-1/2">
+                    <div class="bg-white bg-opacity-10 p-8 rounded-lg backdrop-filter backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 mr-4 text-green-300"></i>
+                                <div>
+                                    <h4 class="font-bold">Our Nursery</h4>
+                                    <p>123 Greenway Boulevard<br>Plantville, PV 12345</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-clock mt-1 mr-4 text-green-300"></i>
+                                <div>
+                                    <h4 class="font-bold">Hours</h4>
+                                    <p>Monday-Friday: 9am - 6pm<br>
+                                    Saturday: 10am - 5pm<br>
+                                    Sunday: 11am - 4pm</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt mt-1 mr-4 text-green-300"></i>
+                                <div>
+                                    <h4 class="font-bold">Call Us</h4>
+                                    <p>(123) 456-7890</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope mt-1 mr-4 text-green-300"></i>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p>hello@greenaura.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-bold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center hover:bg-green-600 transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center hover:bg-green-600 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center hover:bg-green-600 transition">
+                                    <i class="fab fa-pinterest-p"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center hover:bg-green-600 transition">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-white bg-opacity-10 p-8 rounded-lg backdrop-filter backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block mb-2 font-medium">Your Name</label>
+                                    <input type="text" id="name" class="w-full px-4 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent placeholder-white placeholder-opacity-70">
+                                </div>
+                                <div>
+                                    <label for="email" class="block mb-2 font-medium">Email Address</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent placeholder-white placeholder-opacity-70">
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <label for="subject" class="block mb-2 font-medium">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent placeholder-white placeholder-opacity-70">
+                            </div>
+                            <div class="mt-6">
+                                <label for="message" class="block mb-2 font-medium">Your Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent placeholder-white placeholder-opacity-70"></textarea>
+                            </div>
+                            <button type="submit" class="mt-6 bg-white text-green-800 font-bold py-3 px-6 rounded-full hover:bg-green-100 transition duration-300">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-12 bg-green-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-2xl mx-auto">
+                <i class="fas fa-envelope-open-text text-4xl mb-4 floating-icon"></i>
+                <h2 class="text-3xl font-bold mb-4">Join Our Green Community</h2>
+                <p class="mb-6">Subscribe to our newsletter for seasonal care tips, new arrivals, and exclusive offers.</p>
+                <div class="flex flex-col sm:flex-row justify-center max-w-md mx-auto">
+                    <input type="email" placeholder="Your email address" class="px-4 py-3 rounded-l-full sm:rounded-r-none rounded-r-full mb-2 sm:mb-0 w-full text-gray-900 focus:outline-none">
+                    <button class="bg-green-800 hover:bg-green-900 px-6 py-3 rounded-r-full sm:rounded-l-none rounded-l-full font-bold transition duration-300">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-3xl text-green-300 mr-2"></i>
+                        <span class="text-2xl font-bold">GreenAura</span>
+                    </div>
+                    <p class="text-green-200">Bringing nature's beauty into your home since 2010.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-green-200 hover:text-white transition">Home</a></li>
+                        <li><a href="#plants" class="text-green-200 hover:text-white transition">Plants</a></li>
+                        <li><a href="#about" class="text-green-200 hover:text-white transition">About Us</a></li>
+                        <li><a href="#tips" class="text-green-200 hover:text-white transition">Care Tips</a></li>
+                        <li><a href="#contact" class="text-green-200 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Plant Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Indoor Plants</a></li>
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Outdoor Plants</a></li>
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Aquatic Plants</a></li>
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Succulents</a></li>
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Air Plants</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-green-200 hover:text-white transition">Shipping Policy</a></li>
+                        <li><a href="#" class="text-green-200 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-green-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-green-300 text-sm mb-4 md:mb-0">© 2023 GreenAura Nursery. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-cc-visa text-2xl"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-cc-mastercard text-2xl"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-cc-paypal text-2xl"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-cc-apple-pay text-2xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-green-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition duration-300 opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Sample plant data (would normally come from JSON)
+        const plantData = [
+            {
+                name: "Monstera Deliciosa",
+                category: "Indoor",
+                light: "Medium",
+                careLevel: "Easy",
+                image: "https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                description: "Known for its large, glossy leaves with natural holes. A statement plant that thrives in bright, indirect light."
+            },
+            {
+                name: "Snake Plant",
+                category: "Indoor",
+                light: "Low",
+                careLevel: "Very Easy",
+                image: "img/snakeplant.webp", description: "Extremely hardy with tall, upright leaves. Excellent air purifier that tolerates neglect and low light."
+            },
+            {
+                name: "Peace Lily",
+                category: "Indoor",
+                light: "Low",
+                careLevel: "Easy",
+                image: "img/peace-lily.jpg",
+                description: "Produces beautiful white flowers and thrives in shady spots. Great for improving indoor air quality."
+            },
+            {
+                name: "Fiddle Leaf Fig",
+                category: "Indoor",
+                light: "Bright",
+                careLevel: "Challenging",
+                image: "img/fiddle.webp",
+                description: "Trendy tree with large, violin-shaped leaves. Needs consistent care and bright, indirect light."
+            },
+            {
+                name: "Pothos",
+                category: "Indoor",
+                light: "Low",
+                careLevel: "Very Easy",
+                image: "img/pothos.webp",
+                description: "Versatile trailing vine with heart-shaped leaves. Thrives in various light conditions and is easy to propagate."
+            },
+            {
+                name: "ZZ Plant",
+                category: "Indoor",
+                light: "Low",
+                careLevel: "Very Easy",
+                image: "img/zz.webp",
+                description: "Drought-tolerant with glossy, oval leaves. Thrives on neglect and purifies the air."
+            },
+            {
+                name: "Aloe Vera",
+                category: "Succulent",
+                light: "Bright",
+                careLevel: "Easy",
+                image: "img/aloe.jfif",
+                description: "Medicinal succulent with spiky leaves. Needs bright light and infrequent watering."
+            },
+            {
+                name: "Lavender",
+                category: "Outdoor",
+                light: "Bright",
+                careLevel: "Moderate",
+                image: "img/lavender.webp",
+                description: "Fragrant purple flowers that attract pollinators. Needs full sun and well-draining soil."
+            }
+        ];
+
+        // Render plant cards
+        function renderPlants(plants) {
+            const plantGrid = document.querySelector('#plants .grid');
+            plantGrid.innerHTML = '';
+            
+            plants.forEach(plant => {
+                const careLevelColor = {
+                    'Very Easy': 'bg-green-100 text-green-800',
+                    'Easy': 'bg-green-100 text-green-800',
+                    'Moderate': 'bg-yellow-100 text-yellow-800',
+                    'Challenging': 'bg-red-100 text-red-800'
+                };
+                
+                const plantCard = document.createElement('div');
+                plantCard.className = 'plant-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300';
+                plantCard.innerHTML = `
+                    <div class="h-56 overflow-hidden">
+                        <img src="${plant.image}" alt="${plant.name}" class="w-full h-full object-cover transition duration-300">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-green-800 mb-1">${plant.name}</h3>
+                        <div class="flex items-center text-sm text-gray-600 mb-3">
+                            <span class="mr-3">${plant.category}</span>
+                            <i class="fas fa-lightbulb mr-1 text-yellow-500"></i>
+                            <span>${plant.light} Light</span>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-4">${plant.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="${careLevelColor[plant.careLevel]} text-xs px-2 py-1 rounded">${plant.careLevel}</span>
+                            <button class="text-green-600 hover:text-green-800 transition">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                plantGrid.appendChild(plantCard);
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render initial plant cards
+            renderPlants(plantData);
+            
+            // Care tips toggle
+            document.querySelectorAll('.care-tip-toggle').forEach(button => {
+                button.addEventListener('click', function() {
+                    const tip = this.nextElementSibling;
+                    tip.classList.toggle('active');
+                    
+                    const icon = this.querySelector('i');
+                    if (tip.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Tab switching
+            document.querySelectorAll('#plants button').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('#plants button').forEach(t => {
+                        t.classList.remove('tab-active');
+                        t.classList.add('text-gray-600', 'hover:text-green-600');
+                    });
+                    
+                    this.classList.add('tab-active');
+                    this.classList.remove('text-gray-600', 'hover:text-green-600');
+                    
+                    // In a real app, we would filter plants here
+                });
+            });
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Mobile menu toggle would go here
+        });
+    </script>
+</body>
+</html>
